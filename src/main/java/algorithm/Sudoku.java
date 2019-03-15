@@ -36,7 +36,7 @@ public class Sudoku {
                 {".", ".", ".", "4", "1", "9", ".", ".", "5"},
                 {".", ".", ".", ".", "8", ".", ".", "7", "9"}};
         //arr-false arr2-true
-        System.out.println(verify(arr2));
+        System.out.println(verify(arr));
     }
 
 
@@ -50,9 +50,9 @@ public class Sudoku {
                 if (!".".equals(arr[j][i]) && !rowSet.add(arr[j][i])) return false;
                 if (i%3 == 0)
                     if (!".".equals(arr[j/3+(i/3)*3][j%3]) && !subSet.add(arr[j/3+(i/3)*3][j%3])) return false;
-                if (i%3 == 1)
+                else if (i%3 == 1)
                     if (!".".equals(arr[j/3+(i/3)*3][j%3+3]) && !subSet.add(arr[j/3+(i/3)*3][j%3+3])) return false;
-                if (i%3 == 2)
+                else if (i%3 == 2)
                     if (!".".equals(arr[j/3+(i/3)*3][j%3+6]) && !subSet.add(arr[j/3+(i/3)*3][j%3+6])) return false;
             }
             colSet.clear();
