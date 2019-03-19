@@ -14,16 +14,16 @@ public class LongestSubstring {
     }
     public static int lengthOfLongestSubstring(String s) {
         if (s == null || "".equals(s)) return 0;
-        Map<String,Integer> map = new HashMap<>();
+        Map<Character,Integer> map = new HashMap<>();
         int maxLength = 0;
         int temp = 0;
         for (int i = 0;i<s.length(); i++) {
             char c = s.charAt(i);
-            if (map.get(String.valueOf(c)) == null) {
+            if (map.get(c) == null) {
                 temp++;
-                map.put(String.valueOf(c),i);
+                map.put(c,i);
             } else {
-                i = map.get(String.valueOf(c));
+                i = map.get(c);
                 maxLength = maxLength >= temp ? maxLength : temp;
                 temp = 0;
                 map.clear();
