@@ -2,6 +2,9 @@ package algorithm;
 
 import com.alibaba.fastjson.JSON;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 在数组中找出和为target的两个数
  * Created by liangl on 2019/3/18.
@@ -14,6 +17,12 @@ public class ArrayTwoSum {
         System.out.println(JSON.toJSONString(twoSum(arr,target)));
     }
 
+    /**
+     * 暴力查找-时间复杂度n的平方 空间复杂度1
+     * @param nums
+     * @param target
+     * @return
+     */
     public static int[] twoSum(int[] nums, int target) {
         int len = nums.length;
         int result[] = new int[2];
@@ -27,5 +36,24 @@ public class ArrayTwoSum {
             }
         }
         return null;
+    }
+
+    /**
+     * 方法2
+     * Hash表一遍遍历 时间复杂度n,空间复杂度1
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int[] twoSum2(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (map.containsKey(complement)) {
+                return new int[] { map.get(complement), i };
+            }
+            map.put(nums[i], i);
+        }
+        throw new IllegalArgumentException("No two sum solution");
     }
 }
