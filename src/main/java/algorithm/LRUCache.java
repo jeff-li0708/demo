@@ -5,6 +5,8 @@ import java.util.Map;
 
 /**
  * 基于双向链表+HashMap
+ *
+ * 第二种方法就是继承LinkedHashMap,设置LinkedHashMap的属性accessOrder为true并重写removeEldestEntry方法的逻辑
  * Created by liangl on 2019/3/15.
  */
 public class LRUCache {
