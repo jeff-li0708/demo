@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class BinaryWatch {
     public static void main(String[] args) {
-        List<String> result1 = new BinaryWatch().readBinaryWatch(5);
+        List<String> result1 = new BinaryWatch().readBinaryWatch(3);
         for(String s : result1)
             System.out.println(s);
     }
