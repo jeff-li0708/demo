@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.yeepay.sqkkseperator.bean.*;
 import com.yeepay.sqkkseperator.config.Config;
+import org.springframework.stereotype.Service;
 import util.BeanUtil;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.Map;
 /**
  * Created by liangl on 2019/4/8.
  */
+@Service
 public class YibaoPayService {
 
     private Config config = Config.getInstance();
@@ -31,20 +33,27 @@ public class YibaoPayService {
 
     /**
      * 绑卡短信重发
+     * @param requestno 请求单号
+     * @param advicesmstype 短信发送类型 MESSAGE： 短验码将以短信的方式发送给用户，VOICE： 短验码将以语音的方式发送给用户默认值为上次请求的建议发送类型
      * @return
      */
-    public Map<String, String> authBindCardResend(AuthBindCardResend req) {
-        Map<String, String> param = BeanUtil.beanToMap(req);
+    public Map<String, String> authBindCardResend(String requestno, String advicesmstype) {
+        Map<String, String> param = new HashMap<>();
+        param.put("requestno", requestno);
+        param.put("advicesmstype", advicesmstype);
         return YeepayService.yeepayYOP(param, config.getValue("authbindcardresendUri"));
     }
 
     /**
      * 绑卡确认
-     * @param req
+     * @param requestno 请求单号
+     * @param validatecode 验证码
      * @return
      */
-    public Map<String, String> authbindcardconfirm(AuthBindCardConfirm req) {
-        Map<String, String> param = BeanUtil.beanToMap(req);
+    public Map<String, String> authbindcardconfirm(String requestno, String validatecode) {
+        Map<String, String> param = new HashMap<>();
+        param.put("requestno", requestno);
+        param.put("validatecode", validatecode);
         return YeepayService.yeepayYOP(param, config.getValue("authbindcardconfirmUri"));
     }
 
@@ -123,4 +132,19 @@ public class YibaoPayService {
         param.put("requestno", requestno);
         return YeepayService.yeepayYOP(param, config.getValue("bindcardpayqueryUri"));
     }
+
+    /**
+     * 支付对账
+     * @param startdate 开始日期 yyyy-MM-dd
+     * @param enddate 结束日期 yyyy-MM-dd
+     * @return
+     */
+    public Map<String,String> payAccountCheck(String startdate,String enddate) {
+
+        Map<String, String> param = new HashMap<>();
+        param.put("startdate", startdate);
+        param.put("enddate", enddate);
+        return YeepayService.yeepayYOP(param, config.getValue("payfileUri"));
+    }
+
 }

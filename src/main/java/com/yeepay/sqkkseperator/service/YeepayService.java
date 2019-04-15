@@ -47,8 +47,7 @@ public class YeepayService {
 		 	return result;
 	 	}
 		System.out.println("请求YOP之后结果："+yopresponse.toString());
-		System.out.println("请求YOP之后结果："+yopresponse.getStringResult());
-	
+
         	
         	
 		//对结果进行处理
