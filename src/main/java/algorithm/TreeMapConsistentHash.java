@@ -11,7 +11,7 @@ import java.util.TreeMap;
 public class TreeMapConsistentHash {
     private static TreeMap<Long,String> map = new TreeMap<>();
 
-    private static Integer VIRTUAL_NODE_SIZE = 10; //虚拟几点个数
+    private static Integer VIRTUAL_NODE_SIZE = 10; //虚拟节点个数
 
 
     /**
