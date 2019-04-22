@@ -1,6 +1,7 @@
 package fc;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * 等额本息
@@ -9,8 +10,9 @@ import java.math.BigDecimal;
 public class SameCapitalInterest {
 
     public static void main(String[] args) {
-
-        calculate(new BigDecimal(320000),new BigDecimal(0.05635),30*12);
+        BigDecimal monthRate = new BigDecimal(0.14).divide(new BigDecimal(12),6, RoundingMode.HALF_UP);
+        System.out.println(monthRate);
+        calculate(new BigDecimal(150000),new BigDecimal(0.14),36);
     }
 
     /**
@@ -21,7 +23,7 @@ public class SameCapitalInterest {
      */
     public static void calculate(BigDecimal capital, BigDecimal rate, Integer period) {
 
-        BigDecimal monthRate = rate.divide(new BigDecimal(12)).setScale(6,BigDecimal.ROUND_UP);
+        BigDecimal monthRate = rate.divide(new BigDecimal(12),6, RoundingMode.HALF_UP);
         BigDecimal var1 = monthRate.add(BigDecimal.ONE).pow(period).setScale(6,BigDecimal.ROUND_UP);
         BigDecimal var2 = monthRate.add(BigDecimal.ONE).pow(period).subtract(BigDecimal.ONE).setScale(6,BigDecimal.ROUND_UP);
         System.out.println(monthRate+","+var1+","+var2);
