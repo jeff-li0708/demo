@@ -13,18 +13,19 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * http 调用工具类
- * Created by xinz on 2017/3/22.
+ * Created by liangl on 2019/3/22.
  */
 public class HttpHelper {
 
     static org.slf4j.Logger logger = LoggerFactory.getLogger(HttpHelper.class);
 
-    static int TIME_OUT = 30000;   //超时时间
+    static int TIME_OUT = 10000;   //超时时间
     static int POOL_SIZE = 100;    //连接池大小
     static int KEEP_ALIVE_DURATION = 30000;  //连接池任务丢弃超时时间
     static protected OkHttpClient client ;
 
     public static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
+    public static final MediaType MEDIA_TYPE_TEXT = MediaType.parse("text/xml; charset=gbk");
 
     static{
         try {

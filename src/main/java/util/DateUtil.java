@@ -59,6 +59,14 @@ public class DateUtil {
     public static String getDate() {
         return getDateTime(DEFAULT_DATE_FORMAT);
     }
+    /**
+     * 获取当前日期 yyyy-MM-dd
+     *
+     * @return 当前日期
+     */
+    public static String getDate2() {
+        return getDateTime(DATE_FORMAT_YYYY_MM_DD);
+    }
 
     /**
      * 得到用缺省方式格式化的当前日期及时间.

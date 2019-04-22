@@ -1,8 +1,12 @@
 package com;
 
 import com.yeepay.sqkkseperator.bean.AuthBindCardReq;
+import com.yeepay.sqkkseperator.bean.PayToUserReq;
+import com.yeepay.sqkkseperator.config.Config;
 import com.yeepay.sqkkseperator.service.YibaoPayService;
 import org.junit.Test;
+
+import java.util.Map;
 
 /**
  * Created by liangl on 2019/4/15.
@@ -10,6 +14,8 @@ import org.junit.Test;
 public class YibaoPayTest {
 
     private YibaoPayService yibaoPayService = new YibaoPayService();
+
+    private Config config = Config.getInstance();
 
     /**
      *
@@ -43,8 +49,41 @@ public class YibaoPayTest {
         yibaoPayService.authListqueryServlet("J11899","USER_ID");
     }
 
+
+    /**
+     * 还款对账记录
+     */
     @Test
     public void testPayAccountCheck() {
         yibaoPayService.payAccountCheck("2019-04-11","2019-04-15");
+    }
+
+    /**
+     * 查询商户余额
+     */
+    @Test
+    public void testQueryBalance() {
+        Map<String,String> result = yibaoPayService.accountBalanaceQuery();
+        System.out.println(result);
+    }
+
+    @Test
+    public void testPayToUser() {
+        PayToUserReq req = new PayToUserReq();
+        req.setAccount_Name("李亮");
+        req.setAccount_Number("6222022314007119475");
+        req.setAmount("0.01");
+        req.setBank_Code("ICBC");
+        req.setBank_Name("工商银行");
+        req.setBatch_No("20190417002");
+        req.setOrder_Id("2018041700201");
+        Map<String, String> result = yibaoPayService.payToUser(req);
+        System.out.println(result);
+    }
+
+    @Test
+    public void testQueryPayToUser(){
+        Map<String, String> result = yibaoPayService.queryTransfer("20190417001","2018041700101");
+        System.out.println(result);
     }
 }

@@ -4,6 +4,8 @@ List
 ArrayList是一个数组,初始大小为10,每次按原大小的1/2扩容,多用于数据的读取
 LinkedList是一个双向链表,多用于数据的修改
 
+Vector类似于ArrayList,内部是一个数组,只是它的很多实现方法都加了synchronized关键字,实现了同步,因此是线程安全的
+
 Map
 1.HashMap数据结构、hash冲突如何解决、扩容机制、扩容时如何避免rehash的优化
 数组+链表、红黑树。通过链条解决hash冲突，当链表的长度大于8时转为红黑树.
@@ -17,6 +19,15 @@ LinkHashMap的链表有两种有序accessOrder为true的话，LinkHashMap中的�
 3.TreeMap的数据结构、key对象为什么必须要实现Compare接口、如何利用它实现一致性哈希
 红黑树。默认为升序排列方式,左节点<父节点<右节点
 put时会比较key
+可以利用TreeMap实现一致性Hash算法,1.获取大于hash的节点集合SortedMap<Long,String> last = map.tailMap(hash),2.获取最近的一个节点last.get(last.firstKey());
+从JDK7到JDK8有什么改动：JDK7中是数组+链表,JDK8中对链表部分进行了改进,当链表的长度大于8时转为红黑树
+
+4.ConcurrentHashMap的原理
+数据结构上JDK7中是Segment[]+HashEntry[] + 链表,采用了分段锁技术
+JDK8去掉了Segment,采用了 CAS + synchronized 来保证并发安全性。
+
+5.HashTable
+与HashMap结构类似,只是它的很多实现方法都增加了synchronized关键字,实现了同步,因此是线程安全的
 
 -------------------------------------------
 Redis

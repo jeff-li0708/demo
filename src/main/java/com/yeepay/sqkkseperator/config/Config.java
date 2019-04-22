@@ -1,5 +1,6 @@
 package com.yeepay.sqkkseperator.config;
 
+import java.io.InputStream;
 import java.util.ResourceBundle;
 
 public class Config {
@@ -25,6 +26,14 @@ public class Config {
      
  	public String getValue(String key) {
 		return (rb.getString(key));
+	}
+
+	/**
+	 * 获取证书
+	 * @return
+	 */
+	public InputStream getCertStream() {
+		return Config.class.getClassLoader().getResourceAsStream("10000450379.pfx");
 	}
 
      public static void main(String[] args) {
