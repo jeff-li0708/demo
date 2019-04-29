@@ -71,7 +71,7 @@ public class JoloRechargeAPIWrapper {
             paramsMap.put("key", rechargeConfig.getKey());
             paramsMap.put("type", "json");
             paramsMap.put("mode","0");//0 for sandox,1 for live
-            paramsMap.put("service", phone);
+            paramsMap.put("META-INF/services", phone);
             paramsMap.put("amount",String.valueOf(amount));
             paramsMap.put("orderid",orderNo);
             paramsMap.put("operator",operator);
