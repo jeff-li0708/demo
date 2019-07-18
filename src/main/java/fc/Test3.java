@@ -12,5 +12,7 @@ public class Test3 {
         linkedHashMap.put(1,"张三");
         linkedHashMap.put(2,"李四");
         linkedHashMap.get(1);
+        Integer cpuNum = Runtime.getRuntime().availableProcessors();
+        System.out.println(cpuNum);
     }
 }

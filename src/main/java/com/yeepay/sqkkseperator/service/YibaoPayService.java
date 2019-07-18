@@ -157,6 +157,28 @@ public class YibaoPayService {
         return YeepayService.yeepayYOP(param, config.getValue("payfileUri"));
     }
 
+
+    /**
+     * 退款请求
+     * @param requestno
+     * @param paymentyborderid
+     * @param amount
+     * @param remark
+     * @return
+     */
+    public Map<String,String> refund(String requestno, String paymentyborderid, String amount, String remark) {
+        Map<String,String> param = new HashMap<>();
+        param.put("requestno", requestno);
+        param.put("paymentyborderid", paymentyborderid);
+        param.put("amount",amount);
+        param.put("callbackurl",config.getValue("p1_MerId"));
+        param.put("requesttime",DateUtil.getDateTime());
+        param.put("remark",remark);
+        return YeepayService.yeepayYOP(param, config.getValue("refundUri"));
+    }
+
+
+
     /**
      * 查询商户余额
      * @return

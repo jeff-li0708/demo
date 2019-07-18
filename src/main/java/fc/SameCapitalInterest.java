@@ -12,7 +12,7 @@ public class SameCapitalInterest {
     public static void main(String[] args) {
         BigDecimal monthRate = new BigDecimal(0.14).divide(new BigDecimal(12),6, RoundingMode.HALF_UP);
         System.out.println(monthRate);
-        calculate(new BigDecimal(150000),new BigDecimal(0.14),36);
+        calculate(new BigDecimal(10000),new BigDecimal(0.05),12);
     }
 
     /**
