@@ -42,7 +42,7 @@ public class TextDeal2 {
                     out1.write(line+"\r\n"); //
                 } else if (line.contains("provider-medium")) {
                     out2.write(line+"\r\n"); //
-                } else {
+                } else if (line.contains("provider-large")){
                     out3.write(line+"\r\n"); //
                 }
 
