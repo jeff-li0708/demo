@@ -1,18 +1,16 @@
 package fc;
 
-import java.util.LinkedHashMap;
-
 /**
  * Created by liangl on 2019/3/25.
  */
 public class Test3 {
     public static void main(String[] args) {
 
-        LinkedHashMap<Integer,String> linkedHashMap = new LinkedHashMap<>();
-        linkedHashMap.put(1,"张三");
-        linkedHashMap.put(2,"李四");
-        linkedHashMap.get(1);
-        Integer cpuNum = Runtime.getRuntime().availableProcessors();
-        System.out.println(cpuNum);
+        System.out.println(Long.MAX_VALUE);
+        System.out.println(Long.MIN_VALUE);
+        System.out.println(Long.toBinaryString(Long.MAX_VALUE));
+        Long a = 0B111111111111111111111111111111111111111111111111111111111111111L;
+        System.out.println(a);
+        Long.parseLong("111111111111111111111111111111111111111111111111111111111111111", 2);
     }
 }

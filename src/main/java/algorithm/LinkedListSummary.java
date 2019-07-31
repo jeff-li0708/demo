@@ -282,7 +282,7 @@ public class LinkedListSummary {
 
     }
     //给出一单链表头指针head和一节点指针delete，O(1)时间复杂度删除节点delete
-    //可惜采用将delete节点value值与它下个节点的值互换的方法，但是如果delete是最后一个节点，则不行，但是总得复杂度还是O(1)
+    //可以采用将delete节点value值与它下个节点的值互换的方法，但是如果delete是最后一个节点，则不行，但是总得复杂度还是O(1)
     public static void deleteNode(Node head,Node delete){
         //首先处理delete节点为最后一个节点的情况
         if(delete==null)return;
