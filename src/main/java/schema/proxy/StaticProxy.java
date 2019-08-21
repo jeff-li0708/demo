@@ -1,4 +1,4 @@
-package schema;
+package schema.proxy;
 
 /**
  * 静态代理

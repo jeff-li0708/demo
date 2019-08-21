@@ -20,7 +20,8 @@ public class ThreadPoolTest {
         for (int i = 0;i<50;i++) {
             showIdList.add("test-"+i);
         }
-        for (int i = 0;i <3;i++) {
+
+        for (int i = 0;i <500;i++) {
 
             Thread aa = new Thread(new Runnable() {
                 @Override
@@ -32,9 +33,11 @@ public class ThreadPoolTest {
             aa.start();
         }
 
+
     }
 
     public JSONArray test(List<String> showIdList)  {
+        Long start = System.currentTimeMillis();
         try {
             List<Callable<JSONObject>> taskList = new ArrayList<>();
             for (String showId: showIdList){
@@ -62,7 +65,8 @@ public class ThreadPoolTest {
         } catch (Exception e) {
 
         }
-
+        Long end = System.currentTimeMillis();
+        System.out.println(end - start);
         return null;
     }
     class QueryVideoAuthorCommentCount implements Callable<JSONObject>{

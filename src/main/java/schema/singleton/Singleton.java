@@ -1,4 +1,4 @@
-package schema;
+package schema.singleton;
 
 import java.io.Serializable;
 

@@ -1,9 +1,6 @@
 package jdbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * Created by liangl on 2019/8/1.
@@ -25,6 +22,11 @@ public class JDBCConnection {
                  System.out.println("已成功链接数据库！");
                  //3、创建Statement对象
                  Statement st = con.createStatement();
+
+//                 String sql="select * from user where uid = ?";//查询user表的所有信息
+//                 PreparedStatement st = con.prepareStatement(sql);
+//                 st.setInt(1,10);
+
                  //4、执行sql语句
                  String sql="select * from user";//查询user表的所有信息
                  ResultSet rs = st.executeQuery(sql);//查询之后返回结果集
