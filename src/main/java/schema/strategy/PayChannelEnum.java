@@ -4,8 +4,8 @@ package schema.strategy;
  * Created by liangl on 2019/8/21.
  */
 public enum PayChannelEnum {
-    WX("wx","微信支付","schema.strategy.WXPayServiceImpl"),
-    ZFB("zfb","支付宝支付","schema.strategy.ZFBPayServiceImpl")
+    WX("wx","微信支付","WXPayServiceImpl"),
+    ZFB("zfb","支付宝支付","ZFBPayServiceImpl")
     ;
     private final String channel;
     private final String desc;
