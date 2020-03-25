@@ -1,7 +1,5 @@
 package redis;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import redis.clients.jedis.*;
 import redis.clients.jedis.exceptions.JedisMovedDataException;
 import redis.clients.jedis.exceptions.JedisRedirectionException;
@@ -17,7 +15,6 @@ import java.util.*;
  */
 public class JedisClusterPipeline extends PipelineBase implements Closeable {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(JedisClusterPipeline.class);
 
     // 部分字段没有对应的获取方法，只能采用反射来做
     // 你也可以去继承JedisCluster和JedisSlotBasedConnectionHandler来提供访问接口
@@ -197,8 +194,6 @@ public class JedisClusterPipeline extends PipelineBase implements Closeable {
         try {
             return (T)field.get(obj);
         } catch (IllegalArgumentException | IllegalAccessException e) {
-            LOGGER.error("get value fail", e);
-
             throw new RuntimeException(e);
         }
     }
