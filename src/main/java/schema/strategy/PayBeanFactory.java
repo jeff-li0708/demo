@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import util.SpringBeanFactory;
 
 /**
+ * 策略模式
  * Created by liangl on 2019/8/21.
  */
 @Component

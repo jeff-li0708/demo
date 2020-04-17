@@ -9,13 +9,31 @@ import java.util.Map;
  */
 public class TextDeal {
     public static void main(String[] args) {
-        readFile();
+        //readFile();
+        String str = AAAA.getStr("1111");
+        System.out.println(str);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String str = AAAA.getStr("222");
+                System.out.println(str);
+            }
+        });
+        thread.start();
+        Thread thread2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String str = AAAA.getStr("222");
+                System.out.println(str);
+            }
+        });
+        thread2.start();
     }
 
     public static Map<String,Boolean> users = new HashMap<>(1600);
     static {
         try {
-            String pathname = "F://uids.txt";
+            String pathname = "C:\\Users\\jumei\\Desktop\\uid.txt";
             FileReader reader = new FileReader(pathname);
             BufferedReader br = new BufferedReader(reader);
             String line;
@@ -31,8 +49,8 @@ public class TextDeal {
      * 读入TXT文件
      */
     public static void readFile() {
-        String pathname = "F://2019.06.e.csv";
-        File writeName = new File("F://bbbbb.txt");
+        String pathname = "E:\\dbman_4427_txt.txt";
+        File writeName = new File("C:\\Users\\jumei\\Desktop\\bbbbb.txt");
         try {
             FileReader reader = new FileReader(pathname);
             BufferedReader br = new BufferedReader(reader);
@@ -42,16 +60,11 @@ public class TextDeal {
             String line;
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
-                //String cont = line.substring(line.indexOf("user_avatar"),line.indexOf("type")-3);
-                int start = line.lastIndexOf("/")+1;
-                int end = line.indexOf("-");
-                if (start > 1 && end > start) {
-                    String uid = line.substring(start,end);
-                    System.out.println(uid);
-                    if (users.containsKey(uid)) {
-                        out.write(line+"\r\n"); //
-                    }
+                String[] strArr = line.split("   ");
+                if (users.containsKey(strArr[1].trim())) {
+                    out.write(line+"\r\n"); //
                 }
+
             }
             out.flush(); // 把缓存区内容压入文件
         } catch (IOException e) {
