@@ -1,5 +1,7 @@
 package bean;
 
+import java.util.Objects;
+
 /**
  * Created by liangl on 2018/11/30.
  */
@@ -28,6 +30,20 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(seed, user.seed) &&
+                Objects.equals(userName, user.userName);
+    }
+
+    @Override
+    public int hashCode() {
+        return 11;
     }
 
     public static void main(String[] args) throws InterruptedException {
