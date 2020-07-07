@@ -12,12 +12,14 @@ public class CountDownLatchTest {
     public static void main(String[] args) {
 
         final CountDownLatch countDownLatch = new CountDownLatch(2);
-
+        System.out.println("start main thread:"+ System.currentTimeMillis());
         Thread threadOne = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
+                    System.out.println("start thread one:"+ System.currentTimeMillis());
                     Thread.sleep(1000L);
+                    System.out.println("end thread one:"+ System.currentTimeMillis());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -28,7 +30,9 @@ public class CountDownLatchTest {
         Thread threadTwo = new Thread(new Runnable() {
             @Override
             public void run() {
+                System.out.println("start thread two:"+ System.currentTimeMillis());
                 countDownLatch.countDown();
+                System.out.println("end thread two:"+ System.currentTimeMillis());
             }
         });
 
@@ -40,6 +44,7 @@ public class CountDownLatchTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        System.out.println("end main thread:"+ System.currentTimeMillis());
         System.out.println("----end-----------");
     }
 
