@@ -12,16 +12,18 @@ import java.util.concurrent.*;
  * Created by liangl on 2019/7/8.
  */
 public class ThreadPoolTest {
-    //static ExecutorService es = Executors.newFixedThreadPool(50);
+    static ExecutorService es = new ThreadPoolExecutor(2, 5,
+            0L, TimeUnit.MILLISECONDS,
+            new LinkedBlockingQueue<Runnable>());
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         ThreadPoolTest a = new ThreadPoolTest();
         final List<String> showIdList = new ArrayList<>();
-        for (int i = 0;i<50;i++) {
+        for (int i = 0;i<10;i++) {
             showIdList.add("test-"+i);
         }
 
-        for (int i = 0;i <500;i++) {
+        for (int i = 0;i <50;i++) {
 
             Thread aa = new Thread(new Runnable() {
                 @Override
@@ -45,14 +47,14 @@ public class ThreadPoolTest {
             }
 
             List<Future<JSONObject>> result = null;
-            ExecutorService es = new ThreadPoolExecutor(10,50,200, TimeUnit.MILLISECONDS, new SynchronousQueue<Runnable>());
+            //ExecutorService es = new ThreadPoolExecutor(10,50,200, TimeUnit.MILLISECONDS, new SynchronousQueue<Runnable>());
             try {
                 result = es.invokeAll(taskList);
             } catch (InterruptedException e) {
                 System.out.println("eeeeeeeeeeeeeeeee");
                 return null;
             } finally {
-                es.shutdown();
+                //es.shutdown();
             }
 
             if (result!=null && !result.isEmpty()) {
