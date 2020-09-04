@@ -12,7 +12,7 @@ import com.alibaba.fastjson.JSON;
  * 例子8, 1, 6, 6|
  *
  * 解题思路
- * 取两个数运算后的结果与剩余的数继续运算
+ * 取两个数运算后的结果与剩余的数继续递归运算
  */
 public class JudgePoint24 {
     public static void main(String[] args) {

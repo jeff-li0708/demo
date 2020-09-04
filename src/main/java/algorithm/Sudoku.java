@@ -9,6 +9,7 @@ import java.util.HashSet;
  * 2.同一列不能有相同数字
  * 3.每一个小的3×3的格子不能有相同数字
  * Created by liangl on 2019/3/15.
+ * 思路 双循环，用三个Hash表分别表示横竖以及3X3的9个数，若有重复则返回false
  */
 public class Sudoku {
 
@@ -45,7 +46,7 @@ public class Sudoku {
                 {'.','2','.','9','.','.','.','.','.'},
                 {'.','.','4','.','.','.','.','.','.'}};
         //arr-false arr2-true
-        System.out.println(verify(arr3));
+        System.out.println(verify(arr2));
     }
 
 
