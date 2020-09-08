@@ -53,38 +53,32 @@ public class SolveSudoku {
                 {'.','.','.','4','1','9','.','.','5'},
                 {'.','.','.','.','8','.','.','7','9'}};
         char[][] arr = {
-                {'5','3','4','6','7','8','9','1','2'},
-                {'6','7','2','1','9','5','3','4','8'},
-                {'1','9','8','3','4','2','5','6','7'},
-                {'8','5','9','7','6','1','4','2','3'},
-                {'4','2','6','8','5','3','7','9','1'},
-                {'7','1','3','9','2','4','8','5','6'},
+                {'5','3','4','6','7','8','9','.','.'},
+                {'6','7','2','1','9','5','3','.','.'},
+                {'1','9','8','3','4','2','5','6','.'},
+                {'8','5','9','7','6','1','4','.','3'},
+                {'4','2','6','8','5','3','7','.','1'},
+                {'7','1','3','9','2','4','8','.','6'},
                 {'9','6','1','5','3','7','2','8','.'},
-                {'2','8','7','4','1','9','6','3','5'},
-                {'3','4','5','2','8','6','1','7','.'}};
+                {'2','8','7','4','1','9','6','.','5'},
+                {'.','.','.','.','8','.','.','7','9'}};
         //printlArr(arr3);
-        fun(arr);
+        fun(arr3);
     }
 
     public static void fun(char[][] board) {
+        boolean finish = false;
         for (int i = 0;i < 9; i++) {
             for (int j = 0;j < 9; j++) {
-                if('.' == board[i][j]) {
+                if(finish = '.' == board[i][j]) {
                     //存放i行j列的数以及ij所在的子单元格
                     HashSet<String> colSet = new HashSet<>();
                     HashSet<String> rowSet = new HashSet<>();
                     HashSet<String> subSet = new HashSet<>();
-                    boolean isGo = false;
                     for (int p = 0;p < 9; p++){
-                        if (isGo = '.' != board[p][j] && !colSet.add(String.valueOf(board[p][j]))) break;
-                        if (isGo = '.' != board[i][p] && !rowSet.add(String.valueOf(board[i][p]))) break;
-                        if (p%3 == 0){
-                            if(isGo = '.' != board[p/3+(i/3)*3][p%3+(j/3)*3] && !subSet.add(String.valueOf(board[p/3+(i/3)*3][p%3+(j/3)*3]))) break;
-                        } else if (p%3 == 1) {
-                            if(isGo = '.' == board[p/3+(i/3)*3][p%3+(j/3)*3] && !subSet.add(String.valueOf(board[p/3+(i/3)*3][p%3+(j/3)*3])))break;
-                        } else if (p%3 == 2) {
-                            if(isGo = '.' != board[p/3+(i/3)*3][p%3+(j/3)*3] && !subSet.add(String.valueOf(board[p/3+(i/3)*3][p%3+(j/3)*3]))) break;
-                        }
+                        if ('.' != board[p][j] && !colSet.add(String.valueOf(board[p][j]))) return;
+                        if ('.' != board[i][p] && !rowSet.add(String.valueOf(board[i][p]))) return;
+                        if ('.' != board[p/3+(i/3)*3][(p%3)+(j/3)*3] && !subSet.add(String.valueOf(board[p/3+(i/3)*3][(p%3)+(j/3)*3]))) return;
                     }
 
                     for (int k = 1;k < 10;k++) {
@@ -96,8 +90,10 @@ public class SolveSudoku {
                             if (verify(board)) {
                                 printlArr(board);
                             } else {
-                                board[i][j] = '.';
+                                board[i][j] = '.'; //关键
                             }
+                        } else if (k == 9){
+                            return;
                         }
                     }
                 }

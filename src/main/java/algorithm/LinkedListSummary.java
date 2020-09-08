@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.Stack;
 
 /**
+ * 常见的链表处理
  * Created by liangl on 2019/2/25.
  */
 public class LinkedListSummary {
