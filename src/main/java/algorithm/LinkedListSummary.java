@@ -1,5 +1,7 @@
 package algorithm;
 
+import com.alibaba.fastjson.JSON;
+
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Stack;
@@ -10,42 +12,17 @@ import java.util.Stack;
  */
 public class LinkedListSummary {
 
-    public static class Node{
+    public static class ListNode{
         int value;
-        Node next;
-        public Node(int n){
+        ListNode next;
+        public ListNode(int n){
             this.value=n;
             this.next=null;
         }
     }
 
-    public static void main(String[] args) {
-
-        Scanner in=new Scanner(System.in);
-        Node head=null;
-        if(in.hasNextInt()){
-            head=new Node(in.nextInt());
-        }
-        Node temp=head;
-        while(in.hasNextInt()){
-            temp.next=new Node(in.nextInt());
-            temp=temp.next;
-        }
-        in.close();
-        int len=getListLength(head);
-        //Node reHead=reverseList(head);
-        //reHead=reverseListRec(reHead);
-        //Node node_k=reGetKthNode(head,3);
-        Node mid=getMiddleNode(head);
-        System.out.println(mid.value);
-        //reversePrintListRec(head);
-        //reversePrintListStack(head);
-        //Node mergeHead=mergeSortedList(head,null);
-        //Node sortHead=listSort(head);
-
-    }
     //求单链表中结点的个数: getListLength
-    public static int getListLength(Node head){
+    public static int getListLength(ListNode head){
         int len=0;
         while(head!=null){
             len++;
@@ -53,11 +30,15 @@ public class LinkedListSummary {
         }
         return len;
     }
-    //将单链表反转,循环
-    public static Node reverseList(Node head){
+    /**
+     * 将单链表反转,循环
+     * 输入：1->2->3->4
+     * 输出：4->3->2->1
+     */
+    public static ListNode reverseList(ListNode head){
         if(head==null||head.next==null)return head;
-        Node pre=null;
-        Node nex=null;
+        ListNode pre=null;
+        ListNode nex=null;
         while(head!=null){
             nex=head.next;
             head.next=pre;
@@ -67,20 +48,20 @@ public class LinkedListSummary {
         return pre;
     }
     //将单链表反转,递归
-    public static Node reverseListRec(Node head){
+    public static ListNode reverseListRec(ListNode head){
         if(head==null||head.next==null)return head;
-        Node reHead=reverseListRec(head.next);
+        ListNode reHead=reverseListRec(head.next);
         head.next.next=head;
         head.next=null;
         return reHead;
     }
     //查找单链表中的倒数第K个结点（k > 0）
-    public static Node reGetKthNode(Node head,int k){
+    public static ListNode reGetKthListNode(ListNode head,int k){
         if(head==null)return head;
         int len=getListLength(head);
         if(k>len)return null;
-        Node target=head;
-        Node nexk=head;
+        ListNode target=head;
+        ListNode nexk=head;
         for(int i=0;i<k;i++){
             nexk=nexk.next;
         }
@@ -91,10 +72,10 @@ public class LinkedListSummary {
         return target;
     }
     //查找单链表的中间结点(快慢指针，相当于两个指针,一个前进步长为1，一个为2)
-    public static Node getMiddleNode(Node head){
+    public static ListNode getMiddleListNode(ListNode head){
         if(head==null||head.next==null)return head;
-        Node target=head;
-        Node temp=head;
+        ListNode target=head;
+        ListNode temp=head;
         while(temp!=null&&temp.next!=null){
             target=target.next;
             temp=temp.next.next;
@@ -102,7 +83,7 @@ public class LinkedListSummary {
         return target;
     }
     //从尾到头打印单链表,递归
-    public static void reversePrintListRec(Node head){
+    public static void reversePrintListRec(ListNode head){
         if(head==null)return;
         else{
             reversePrintListRec(head.next);
@@ -110,8 +91,8 @@ public class LinkedListSummary {
         }
     }
     //从尾到头打印单链表,栈
-    public static void reversePrintListStack(Node head){
-        Stack<Node> s=new Stack<Node>();
+    public static void reversePrintListStack(ListNode head){
+        Stack<ListNode> s=new Stack<ListNode>();
         while(head!=null){
             s.push(head);
             head=head.next;
@@ -121,10 +102,10 @@ public class LinkedListSummary {
         }
     }
     //合并两个有序的单链表head1和head2，循环
-    public static Node mergeSortedList(Node head1,Node head2){
+    public static ListNode mergeSortedList(ListNode head1,ListNode head2){
         if(head1==null)return head2;
         if(head2==null)return head1;
-        Node target=null;
+        ListNode target=null;
         if(head1.value>head2.value){
             target=head2;
             head2=head2.next;
@@ -134,7 +115,7 @@ public class LinkedListSummary {
             head1=head1.next;
         }
         target.next=null;
-        Node mergeHead=target;
+        ListNode mergeHead=target;
         while(head1!=null && head2!=null){
             if(head1.value>head2.value){
                 target.next=head2;
@@ -152,7 +133,7 @@ public class LinkedListSummary {
         return mergeHead;
     }
     //合并两个有序的单链表head1和head2，递归
-    public static Node mergeSortedListRec(Node head1,Node head2){
+    public static ListNode mergeSortedListRec(ListNode head1,ListNode head2){
         if(head1==null)return head2;
         if(head2==null)return head1;
         if(head1.value>head2.value){
@@ -165,30 +146,30 @@ public class LinkedListSummary {
         }
     }
     //对单链表进行排序,归并排序,在排序里面不建议选用递归的合并有序链表算法，如果链表长度较长，很容易出现栈溢出
-    public static Node listSort(Node head){
-        Node nex=null;
+    public static ListNode listSort(ListNode head){
+        ListNode nex=null;
         if(head==null||head.next==null)return head;
         else if(head.next.next==null){
             nex=head.next;
             head.next=null;
         }
         else{
-            Node mid=getMiddleNode(head);
+            ListNode mid=getMiddleListNode(head);
             nex=mid.next;
             mid.next=null;
         }
         return mergeSortedList(listSort(head),listSort(nex));//合并两个有序链表，不建议递归
     }
     //对单链表进行排序,插入排序
-    public Node insertionSortList(Node head) {
+    public ListNode insertionSortList(ListNode head) {
         if(head==null||head.next==null)return head;
-        Node pnex=head.next;
-        Node pnex_nex=null;
+        ListNode pnex=head.next;
+        ListNode pnex_nex=null;
         head.next=null;
         while(pnex!=null){
             pnex_nex=pnex.next;
-            Node temp=head;
-            Node temp_pre=null;
+            ListNode temp=head;
+            ListNode temp_pre=null;
             while(temp!=null){
                 if(temp.value>pnex.value)break;
                 temp_pre=temp;
@@ -207,10 +188,10 @@ public class LinkedListSummary {
         return head;
     }
     //判断一个单链表中是否有环,快慢指针
-    public static boolean hasCycle(Node head){
+    public static boolean hasCycle(ListNode head){
         boolean flag=false;
-        Node p1=head;
-        Node p2=head;
+        ListNode p1=head;
+        ListNode p2=head;
         while(p1!=null&&p2!=null){
             p1=p1.next;
             p2=p2.next.next;
@@ -223,8 +204,8 @@ public class LinkedListSummary {
     }
     //判断两个单链表是否相交,如果相交返回第一个节点，否则返回null
     //如果单纯的判断是否相交，只需要看最后一个指针是否相等
-    public static Node isIntersect(Node head1,Node head2){
-        Node target=null;
+    public static ListNode isIntersect(ListNode head1,ListNode head2){
+        ListNode target=null;
         if(head1==null||head2==null)return target;
         int len1=getListLength(head1);
         int len2=getListLength(head2);
@@ -250,9 +231,9 @@ public class LinkedListSummary {
         return target;
     }
     //已知一个单链表中存在环，求进入环中的第一个节点,利用hashmap，不要用ArrayList，因为判断ArrayList是否包含某个元素的效率不高
-    public static Node getFirstNodeInCycleHashMap(Node head){
-        Node target=null;
-        HashMap<Node,Boolean> map=new HashMap<Node,Boolean>();
+    public static ListNode getFirstListNodeInCycleHashMap(ListNode head){
+        ListNode target=null;
+        HashMap<ListNode,Boolean> map=new HashMap<ListNode,Boolean>();
         while(head!=null){
             if(map.containsKey(head))target=head;
             else{
@@ -264,9 +245,9 @@ public class LinkedListSummary {
     }
     //已知一个单链表中存在环，求进入环中的第一个节点,不用hashmap
     //用快慢指针，与判断一个单链表中是否有环一样，找到快慢指针第一次相交的节点，此时这个节点距离环开始节点的长度和链表投距离环开始的节点的长度相等
-    public static Node getFirstNodeInCycle(Node head){
-        Node fast=head;
-        Node slow=head;
+    public static ListNode getFirstListNodeInCycle(ListNode head){
+        ListNode fast=head;
+        ListNode slow=head;
         while(fast!=null&&fast.next!=null){
             slow=slow.next;
             fast=fast.next.next;
@@ -284,13 +265,13 @@ public class LinkedListSummary {
     }
     //给出一单链表头指针head和一节点指针delete，O(1)时间复杂度删除节点delete
     //可以采用将delete节点value值与它下个节点的值互换的方法，但是如果delete是最后一个节点，则不行，但是总得复杂度还是O(1)
-    public static void deleteNode(Node head,Node delete){
+    public static void deleteListNode(ListNode head,ListNode delete){
         //首先处理delete节点为最后一个节点的情况
         if(delete==null)return;
         if(delete.next==null){
             if(head==delete)head=null;
             else{
-                Node temp=head;
+                ListNode temp=head;
                 while(temp.next!=delete){
                     temp=temp.next;
                 }
@@ -303,4 +284,107 @@ public class LinkedListSummary {
         }
         return;
     }
+
+    /**
+     * 给定一个链表，旋转链表，将链表每个节点向右移动 k 个位置，其中 k 是非负数。
+     * 输入: 1->2->3->4->5->NULL, k = 2
+     * 输出: 4->5->1->2->3->NULL
+     * @param head
+     * @param k
+     * @return
+     */
+    public static ListNode moveListNode(ListNode head,int k){
+        if(head==null)return head;
+        int len=getListLength(head);
+        k = k % len;
+        if (k == 0) return head;
+        ListNode nexk=head;
+        ListNode target=head;
+        for(int i=0;i<k;i++){
+            nexk=nexk.next;
+        }
+        ListNode returnNode = head;
+        while(nexk != null){
+            if (nexk.next == null) {
+                returnNode = target.next;
+                target.next = null;
+                nexk.next = head;
+                break;
+            } else {
+                target=target.next;
+                nexk=nexk.next;
+            }
+        }
+        return returnNode;
+    }
+
+    /**
+     * 给定一个头结点为 root 的链表, 编写一个函数以将链表分隔为 k 个连续的部分。每个字链表的长度相差不能超过1
+     * @param root
+     * @param k
+     * @return
+     */
+    public static ListNode[] splitListNode(ListNode root,int k){
+        ListNode[] returnNode = new ListNode[k];
+        if(root == null || k == 0) return returnNode;
+        int len = getListLength(root);
+        int subLen = len / k,p = len % k;
+        int[] subLenArr = new int[k];
+        for (int i = 0;i<k;i++) {
+            if (i < p){
+                subLenArr[i] = subLen+1;
+            } else {
+                subLenArr[i] = subLen;
+            }
+        }
+        int i=0;
+        ListNode head = root;
+        while(root != null){
+            subLenArr[i]--;
+            if (subLenArr[i] == 0) {
+                ListNode temp = root.next;
+                root.next = null;
+                returnNode[i++] = head;
+                head = temp;
+                root = temp;
+            } else {
+                root=root.next;
+            }
+        }
+        if (head != null) {
+            returnNode[i++] = head;
+        }
+        return returnNode;
+    }
+
+
+
+    public static void main(String[] args) {
+
+        Scanner in=new Scanner(System.in);
+        ListNode head=null;
+        if(in.hasNextInt()){
+            head=new ListNode(in.nextInt());
+        }
+        ListNode temp=head;
+        while(in.hasNextInt()){
+            temp.next=new ListNode(in.nextInt());
+            temp=temp.next;
+        }
+        in.close();
+//        int len=getListLength(head);
+        //ListNode reHead=reverseList(head);
+        //reHead=reverseListRec(reHead);
+        //ListNode ListNode_k=reGetKthListNode(head,3);
+//        ListNode mid=getMiddleListNode(head);
+//        System.out.println(mid.value);
+        //reversePrintListRec(head);
+        //reversePrintListStack(head);
+        //ListNode mergeHead=mergeSortedList(head,null);
+        //ListNode sortHead=listSort(head);
+        ListNode[] listNodes = splitListNode(head, 3);
+        System.out.println(JSON.toJSONString(listNodes));
+
+    }
+
 }
