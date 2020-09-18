@@ -16,7 +16,7 @@ import java.util.Arrays;
  * leaves 中只包含字符 'r' 和字符 'y'
  * Created by liangl on 2019/3/11.
  */
-public class DynamicPlan3 {
+public class DynamicProgramming3 {
     public static void main(String[] args) {
         String leaves = "yry";
         int n = leaves.length();

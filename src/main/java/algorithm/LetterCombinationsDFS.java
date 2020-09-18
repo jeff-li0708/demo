@@ -8,10 +8,10 @@ import java.util.List;
  * 解答：回溯dfs
  * Created by liangl on 2019/4/1.
  */
-public class LetterCombinations {
+public class LetterCombinationsDFS {
     public static void main(String[] args) {
 
-        List<String> list = new LetterCombinations().letterCombinations("2375");
+        List<String> list = new LetterCombinationsDFS().letterCombinations("2375");
         for (String s : list)
             System.out.println(s);
     }

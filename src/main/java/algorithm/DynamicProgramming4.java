@@ -1,5 +1,7 @@
 package algorithm;
 
+import java.util.*;
+
 /**
  * 474
  * 在计算机界中，我们总是追求用有限的资源获取最大的收益。
@@ -20,11 +22,15 @@ package algorithm;
  * 解释: 总共 4 个字符串可以通过 5 个 0 和 3 个 1 拼出，即 "10","0001","1","0" 。
  *
  */
-public class DynamicPlan4 {
+public class DynamicProgramming4 {
     public static void main(String[] args) {
         String[] strs = {"10","0001","111001","1","0"};
+        int[] nums = {1,2,3};
         int m = 4,n=3;
         findMaxForm(strs,m,n);
+        List list = new ArrayList();
+        list.addAll(Arrays.asList(strs));
+        Set<List<Integer>> set = new HashSet<>();
     }
     public static int findMaxForm(String[] strs, int m, int n) {
         int[][] dp = new int[m + 1][n+1];
@@ -39,14 +45,15 @@ public class DynamicPlan4 {
                     dp[i][j] = Math.max(dp[i][j], 1+dp[i-count0][j-count1]);
                 }
             }
-//            for(int[] row:dp){
-//                for (int a : row) {
-//                    System.out.print(a + (a > 9 ? "  ":"   "));
-//                }
-//                System.out.println();
-//            }
+            for(int[] row:dp){
+                for (int a : row) {
+                    System.out.print(a + (a > 9 ? "  ":"   "));
+                }
+                System.out.println();
+            }
 //            System.out.println("------------------------------");
         }
         return dp[m][n];
     }
+
 }

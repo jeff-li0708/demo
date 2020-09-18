@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  * Created by liangl on 2019/3/11.
  */
-public class DynamicPlan2 {
+public class DynamicProgramming2 {
     public static void main(String[] args) {
         List<Product> list = new ArrayList<>();
         for (int i = 0;i < 20; i++) {
