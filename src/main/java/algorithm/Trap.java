@@ -8,7 +8,7 @@ import java.util.Stack;
 public class Trap {
     public static void main(String[] args) {
         int[] height = {0,1,0,2,1,0,1,3,2,1,2,1};
-        Stack<Integer> stack = new Stack<>();//记录柱体的下标
+        Stack<Integer> stack = new Stack<>();//记录柱体的下标,栈低到栈顶呈递减
         int res = 0;
         // 遍历每个柱体
         for (int i = 0; i < height.length; i++) {
