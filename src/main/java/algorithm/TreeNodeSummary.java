@@ -182,6 +182,20 @@ public class TreeNodeSummary {
         intList.add(root.val);
         inorderFind(root.right);
     }
+    /***中序（迭代）13254**/
+    public void iterationInOrderFind(TreeNode root){
+        Stack<TreeNode> stack = new Stack<>();
+        while (!stack.isEmpty() || root != null) {
+            if (root != null) {
+                stack.push(root);
+                root = root.left;
+            } else {
+                TreeNode node = stack.pop();
+                intList.add(node.val);
+                root = node.right;
+            }
+        }
+    }
 
     /***后序13254**/
     public void postorderFind(TreeNode root){
@@ -191,6 +205,17 @@ public class TreeNodeSummary {
         intList.add(root.val);
     }
 
+    /***后序（迭代）13254**/
+    public void iterationFind(TreeNode root){
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while(!stack.isEmpty()){
+            TreeNode node = stack.pop();
+            if(node.left != null) stack.push(node.left);//和传统先序遍历不一样，先将左结点入栈
+            if(node.right != null) stack.push(node.right);//后将右结点入栈
+            intList.add(0,node.val);  //逆序添加结点值
+        }
+    }
     /***反过来的后序（右->左->根）53124**/
     public void repostorderFind(TreeNode root){
         if (root == null) return;
@@ -251,7 +276,7 @@ public class TreeNodeSummary {
 //        int[] preorder = {3,9,20,15,7};
 //        int[] inorder = {9,3,15,20,7};
 //        TreeNode treeNode = obj.recursive(preorder,inorder,0, inorder.length - 1,0);
-        List<List<Integer>> lists = obj.levelOrderBottom(root);
+        obj.iterationInOrderFind(root);
         for (Integer a:intList)
         System.out.println(a);
 
