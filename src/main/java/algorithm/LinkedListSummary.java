@@ -194,8 +194,8 @@ public class LinkedListSummary {
         ListNode p2=head;
         while(p1!=null&&p2!=null){
             p1=p1.next;
-            p2=p2.next.next;
-            if(p2==p1){
+            p2=(p2.next != null ? p2.next.next:null);
+            if(p2==p1&&p1 != null){
                 flag=true;
                 break;
             }
@@ -244,7 +244,7 @@ public class LinkedListSummary {
         return target;
     }
     //已知一个单链表中存在环，求进入环中的第一个节点,不用hashmap
-    //用快慢指针，与判断一个单链表中是否有环一样，找到快慢指针第一次相交的节点，此时这个节点距离环开始节点的长度和链表投距离环开始的节点的长度相等
+    //用快慢指针，与判断一个单链表中是否有环一样，找到快慢指针第一次相交的节点，此时这个节点距离环开始节点的长度和链表头距离环开始的节点的长度相等
     public static ListNode getFirstListNodeInCycle(ListNode head){
         ListNode fast=head;
         ListNode slow=head;
@@ -254,7 +254,7 @@ public class LinkedListSummary {
             if(slow==fast)break;
         }
         if(fast==null||fast.next==null)return null;//判断是否包含环
-        //相遇节点距离环开始节点的长度和链表投距离环开始的节点的长度相等
+        //相遇节点距离环开始节点的长度和链表头距离环开始的节点的长度相等
         slow=head;
         while(slow!=fast){
             slow=slow.next;
