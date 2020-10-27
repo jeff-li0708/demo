@@ -4,16 +4,7 @@ package algorithm;
  * 数组排序
  * Created by liangl on 2019/2/19.
  */
-public class SortTest {
-
-    public static void main(String[] args) {
-        int[] arr = {12,3,56,44,76,32,4,8,88,66};
-        for (int a:arr) System.out.print(a+",");
-        System.out.println();
-//        arr = bubbling(arr);
-        new SortTest().quickSort(arr,0,arr.length -1);
-        for (int a:arr) System.out.print(a + ",");
-    }
+public class SortSummary {
 
     /****冒泡**********/
     public static int[] bubbling(int[] arr) {
@@ -52,6 +43,17 @@ public class SortTest {
         }
         quickSort(nums,start,i-1);
         quickSort(nums,i+1,end);
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {12,3,56,44,76,32,4,8,88,66};
+        for (int a:arr) System.out.print(a+",");
+        System.out.println();
+//        arr = bubbling(arr);
+        new SortSummary().quickSort(arr,0,arr.length -1);
+        for (int a:arr) System.out.print(a + ",");
+        String s = "30";
+
     }
 
 }
