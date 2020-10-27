@@ -357,7 +357,22 @@ public class LinkedListSummary {
         return returnNode;
     }
 
-
+    /**
+     * 判断一个链表是否为回文链表。
+     * 先声明一个指向头节点的指针，利用递归判断出栈的节点是否与指针指向的节点相等，
+     * 相等则指针往后移动一位
+     */
+    ListNode top;
+    public boolean isPalindrome(ListNode head) {
+        top = head;
+        isPalindromeDFS(head);
+        return top == null;
+    }
+    public void isPalindromeDFS(ListNode head){
+        if (head == null) return;
+        isPalindromeDFS(head.next);
+        if (head.value == top.value) top = top.next;
+    }
 
     public static void main(String[] args) {
 
@@ -382,9 +397,11 @@ public class LinkedListSummary {
         //reversePrintListStack(head);
         //ListNode mergeHead=mergeSortedList(head,null);
         //ListNode sortHead=listSort(head);
-        ListNode[] listNodes = splitListNode(head, 3);
-        System.out.println(JSON.toJSONString(listNodes));
+//        ListNode[] listNodes = splitListNode(head, 3);
+//        System.out.println(JSON.toJSONString(listNodes));
+        String s = "3";
 
+        System.out.println(s.compareTo("30"));
     }
 
 }
