@@ -175,6 +175,22 @@ public class TreeNodeSummary {
         preorderFind(root.left);
         preorderFind((root.right));
     }
+    /***先序(迭代) 42135*/
+    public void preorderTraversal(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while(!stack.isEmpty()){
+            TreeNode node = stack.pop();
+            intList.add(node.val);
+            if (node.right != null){
+                stack.push(node.right);
+            }
+            if (node.left != null){
+                stack.push(node.left);
+            }
+        }
+    }
+
     /***中序12345**/
     public void inorderFind(TreeNode root){
         if (root == null) return;
