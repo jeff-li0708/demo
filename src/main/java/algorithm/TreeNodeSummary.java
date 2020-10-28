@@ -241,6 +241,17 @@ public class TreeNodeSummary {
     }
 
     /**
+     * 查找二叉搜索树第 k 个最小的元素
+     * 思路：递归中序遍历，找到第k个最小的数直接返回
+     */
+    int idx=0;
+    public int kthSmallest(TreeNode root, int k) {
+        if (root==null) return 0;
+        int res = kthSmallest(root.left,k);
+        if (++idx==k) return root.val;
+        return res>0?res:kthSmallest(root.right,k);
+    }
+    /**
      * 给定一个二叉树，返回其节点值自底向上的层次遍历。 （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）
      * @param root
      * @return [[1,3],[2,5],[4]]
