@@ -2,8 +2,11 @@ package algorithm;
 
 import com.alibaba.fastjson.JSON;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 给定一个非空的整数数组，返回其中出现频率前 k 高的元素。

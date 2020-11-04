@@ -10,7 +10,9 @@ import java.lang.reflect.Proxy;
  * 在java的java.lang.reflect包下提供了一个Proxy类和一个InvocationHandler接口，通过这个类和这个接口可以生成JDK动态代理类和动态代理对象
  * 1.实现InvocationHandler接口
  * 2.创建一个InvocationHandler实例
- * 3.通过Proxy.newProxyInstance方法创建代理对象
+ * 3.通过Proxy.newProxyInstance(ClassLoader loader,
+ *                                           Class<?>[] interfaces,
+ *                                           InvocationHandler h)方法创建代理对象
  * Created by liangl on 2019/3/4.
  */
 public class DynamicProxy {

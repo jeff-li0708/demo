@@ -1,8 +1,6 @@
 package fc;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by liangl on 2019/3/25.
@@ -13,18 +11,30 @@ public class Test3 {
         for (int i = 0; i< 10; i++) {
             list.add(i);
         }
-        Iterator<Integer> iterator = list.iterator();
-        while (iterator.hasNext()){
-            Integer a = iterator.next();
-            iterator.remove();
+        for (Integer a:list){
             System.out.println(a);
+            if (a>7) list.add(3);
         }
-        for (int i = 0; i< list.size(); i++) {
-            if (i == 5) {
-                list.remove(i);
-            } else {
-                System.out.println(list.get(i));
-            }
-        }
+//        Iterator<Integer> iterator = list.iterator();
+//        while (iterator.hasNext()){
+//            Integer a = iterator.next();
+//            iterator.remove();
+//            System.out.println(a);
+//        }
+//        for (int i = 0; i< list.size(); i++) {
+//            if (i == 5) {
+//                list.remove(i);
+//            } else {
+//                System.out.println(list.get(i));
+//            }
+//        }
+//        Map<String,Integer> map = new HashMap<>();
+//        Iterator<Map.Entry<String, Integer>> iterator1 = map.entrySet().iterator();
+//        while (iterator1.hasNext()){
+//            if (iterator1.next().getValue()<1){
+//                iterator1.remove();
+//            }
+//
+//        }
     }
 }

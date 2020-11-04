@@ -22,6 +22,7 @@ import java.util.List;
  */
 public class ArrayPermute {
     public static void main(String[] args) {
+
         int[] nums = {1,2,3};
         List<List<Integer>> resultList = new ArrayList<>();
         for (int i = 0;i<nums.length;i++){
@@ -29,6 +30,7 @@ public class ArrayPermute {
             list.add(nums[i]);
             fun(resultList,list,nums);
         }
+
         System.out.println(resultList);
     }
 

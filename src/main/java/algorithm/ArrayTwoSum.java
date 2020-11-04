@@ -12,9 +12,9 @@ import java.util.Map;
 public class ArrayTwoSum {
 
     public static void main(String[] args) {
-        int[] arr = {3,2,10,8};
+        int[] a = {1,2,3,4,5};
         int target = 11;
-        System.out.println(JSON.toJSONString(twoSum(arr,target)));
+        System.out.println(JSON.toJSONString(twoSum(a,target)));
     }
 
     /**
