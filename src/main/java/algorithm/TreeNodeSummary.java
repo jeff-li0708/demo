@@ -9,17 +9,75 @@ public class TreeNodeSummary {
         TreeNode left;
         TreeNode right;
         TreeNode(int x) { val = x; }
-     }
-    public List<TreeNode> searchTreeNode(TreeNode root){
-         if (root == null) return null;
-         if (root != null) {
-             list.add(root);
-         }
-         searchTreeNode(root.left);
-            searchTreeNode(root.right);
-         return list;
     }
+    public void add(int val){
+        TreeNode node = new TreeNode(val);
+        if (root == null){
+            root = node;
+        } else {
+            TreeNode parent = null;
+            TreeNode temp = root;
+            while(true){
+                if(temp==null)break;
+                parent = temp;
+                if(node.val<=temp.val){
+                    temp = temp.left;
+                }else{
+                    temp = temp.right;
+                }
+            }
+            if(parent!=null){
+                if(node.val<=parent.val){//append to left
+                    parent.left = node;
+                }else{//append to right
+                    parent.right = node;
+                }
+            }
+        }
+    }
+    public void del(int val){
+        TreeNode p = root;//要删除的节点
+        TreeNode parent = null;//要删除的节点的父节点
+        //1.查到要删除的节点和其父节点
+        while (p!=null&&p.val!=val){
+            parent = p;
+            if(val<p.val) p = p.left;
+            else p=p.right;
+        }
+        if(p==null) return;//没找到要删除的节点
+        TreeNode rightNode = null;
+        //2.将要删除的节点的左子树添加到右子树下
+        if (p.left != null && p.right!=null){
+            TreeNode temp = p.right;
+            while(true){
+                if(temp==null)break;
+                if(p.left.val<=temp.val&&temp.left == null){
+                    temp.left = p.left;
+                    break;
+                }
+                if (p.left.val > temp.val&&temp.right==null){
+                    temp.right=p.right;
+                    break;
+                }
+                if (p.left.val<=temp.val){
+                    temp=temp.left;
+                }else temp=temp.right;
+            }
+            rightNode = p.right;
+        } else if (p.left != null&&p.right==null) rightNode = p.left;
+        else rightNode = p.right;
 
+        //3.替换要删除节点的位置
+        if (parent!=null){
+            if(parent.left==p){
+                parent.left=rightNode;
+            } else {
+                parent.right=rightNode;
+            }
+        } else {
+            root = rightNode;
+        }
+    }
 
     /**
      * 累加二叉树
@@ -282,6 +340,7 @@ public class TreeNodeSummary {
     static Map<TreeNode,Integer> map = new HashMap<>();
     static List<TreeNode> list = new ArrayList<>();
     static List<Integer> intList = new ArrayList<>();
+    static TreeNode root;
 
     /**
      *       4
@@ -292,16 +351,22 @@ public class TreeNodeSummary {
      * @param args
      */
     public static void main(String[] args) {
-        TreeNode root = new TreeNode(4);
-        TreeNode l1 = new TreeNode(2);
-        root.left = l1;
-        l1.left = new TreeNode(1);
-        l1.right = new TreeNode(3);
-        root.right = new TreeNode(5);
+//        TreeNode root = new TreeNode(4);
+//        TreeNode l1 = new TreeNode(2);
+//        root.left = l1;
+//        l1.left = new TreeNode(1);
+//        l1.right = new TreeNode(3);
+//        root.right = new TreeNode(5);
         TreeNodeSummary obj = new TreeNodeSummary();
-        obj.iterationInOrderFind(root);
-        for (Integer a:intList)
-        System.out.println(a);
+        obj.add(4);
+        obj.add(2);
+        obj.add(5);
+        obj.add(1);
+        obj.add(3);
+        obj.del(2);
+//        obj.iterationInOrderFind(root);
+//        for (Integer a:intList)
+//        System.out.println(a);
 
     }
 }
