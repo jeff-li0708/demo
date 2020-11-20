@@ -30,6 +30,27 @@ public class LinkedListSummary {
         }
         return len;
     }
+    public  static ListNode swapListNode(ListNode head){
+        if (head == null || head.next == null) return head;
+        int i = 1;
+        ListNode returnNode = head.next;
+        ListNode pro = null;
+        while(head!=null) {
+            if (i%2==1 && head.next != null){
+                ListNode temp = head.next;
+                head.next = temp.next;
+                temp.next = head;
+                if (pro != null){
+                    pro.next = temp;
+                }
+                pro = head;
+            } else {
+                head = head.next;
+            }
+            i++;
+        }
+        return returnNode;
+    }
     /**
      * 将单链表反转,循环
      * 输入：1->2->3->4
