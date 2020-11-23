@@ -50,12 +50,18 @@ JVM会判断该字段值是否为X...X01，是则替换为刚才分配的锁记�
 # **可重入锁 ReentrantLock 及其他显式锁相关问题**
 
 1.  跟 Synchronized 相比，可重入锁 ReentrantLock 其实现原理有什么不同？
+synchronized是Java语言的关键字，基于JVM实现。而ReentrantLock是基于JDK的API层面实现的，核心技术AQS、CAS park()、unpark()
 
 2.  那么请谈谈 AQS 框架是怎么回事儿？
+AQS就是同步阻塞队列，利用一个双端队列存在阻塞的线程
 
 3.  请尽可能详尽地对比下 Synchronized 和 ReentrantLock 的异同。
+「锁的实现：」** synchronized是Java语言的关键字，基于JVM实现。而ReentrantLock是基于JDK的API层面实现的（一般是lock()和unlock()方法配合try/finally 语句块来完成。）
+「性能：」** 在JDK1.6锁优化以前，synchronized的性能比ReenTrantLock差很多。但是JDK6开始，增加了适应性自旋、锁消除等，两者性能就差不多了。
+「功能特点：」** ReentrantLock 比 synchronized 增加了一些高级功能，如等待可中断、可实现公平锁、可实现选择性通知。
 
 4.  ReentrantLock 是如何实现可重入性的？
+在调用lock方法时，会检查AQS的state是否为大于0，也就是锁被占用，如果被占用这个时候会比较当前线程是否就是持有锁的线程，是则state+1并返回true，表示重入成功
 
 5.  除了 ReetrantLock，你还接触过 JUC 中的哪些并发工具？
 
