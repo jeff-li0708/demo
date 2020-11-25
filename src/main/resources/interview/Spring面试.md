@@ -9,10 +9,24 @@
 # **一、基本概念面试题集（ Spring 相关概念梳理）**
 
 1.  谈谈对 Spring IoC 的理解？
+IoC(Inversion of Control),即控制反转，它是一种设计思想，一个重要的面向对象编程的法则，它能指导我们如何设计出松耦合、更优良的程序。传统应用程序都是由我们在类内部主动创建依赖对象，
+从而导致类与类之间高耦合，难于测试；有了IoC容器后，把创建和查找依赖对象的控制权交给了容器，由容器进行注入组合对象，所以对象与对象之间是 松散耦合，这样也方便测试，利于功能复用，
+更重要的是使得程序的整个体系结构变得非常灵活。
+对于spring框架来说，就是由spring来负责控制对象的生命周期和对象间的关系。
 
 2.  谈谈对 Spring DI 的理解？
+DI—Dependency Injection，即“依赖注入”：组件之间依赖关系由容器在运行期决定，形象的说，即由容器动态的将某个依赖关系注入到组件之中。
+依赖注入的目的并非为软件系统带来更多功能，而是为了提升组件重用的频率，并为系统搭建一个灵活、可扩展的平台。
+可以看出IoC是一种设计的思想，而DI就是这种思想的一种具体实现
 
 3.  BeanFactory 接口和 ApplicationContext 接口不同点是什么？
+BeanFactory是Spring里面最低层的接口，提供了最简单的容器的功能，只提供了实例化对象和获取对象的功能；
+ApplicationContext又叫应用上下文，它继承了BeanFactory接口，它是Spring的一个更高级的容器，提供了更多的有用的功能；
+1) 国际化（MessageSource）
+2) 访问资源，如URL和文件（ResourceLoader）
+3) 载入多个（有继承关系）上下文 ，使得每一个上下文都专注于一个特定的层次，比如应用的web层  
+4) 消息发送、响应机制（ApplicationEventPublisher）
+5) AOP（拦截器）
 
 4.  请介绍你熟悉的 Spring 核心类，并说明有什么作用？
 
@@ -23,12 +37,22 @@
 7.  解释 AOP 模块
 
 8.  Spring 的通知类型有哪些，请简单介绍一下？
+（1）前置通知（Before advice）：在某连接点（join point）之前执行的通知，但这个通知不能阻止连接点前的执行（除非它抛出一个异常）。
+（2）返回后通知（After returning advice）：在某连接点（join point）正常完成后执行的通知：例如，一个方法没有抛出任何异常，正常返回。
+（3）抛出异常后通知（After throwing advice）：在方法抛出异常退出时执行的通知。
+（4）后通知（After (finally) advice）：当某连接点退出的时候执行的通知（不论是正常返回还是异常退出）。
+（5）环绕通知（Around Advice）：包围一个连接点（join point）的通知，如方法调用。这是最强大的一种通知类型。 环绕通知可以在方法调用前后完成自定义的行为。它也会选择是否继续执行连接点或直接返回它们自己的返回值或抛出异常来结束执行。 环绕通知是最常用的一种通知类型。大部分基于拦截的AOP框架，例如Nanning和JBoss4，都只提供环绕通知。
 
 9.  Spring 通知类型使用场景分别有哪些？
 
 10.  请介绍一下你对 Spring Beans 的理解?
 
 11.  Spring 有哪些优点?
+1.控制反转将对象的创建交给了spring,简化了开发，降低了代码之间的耦合性和侵入性。
+2.方便对程序进行声明式事物管理，我们只需通过配置就可以完成对事物管理。
+3.方便集成各种优秀的框架，spring不排斥各种优秀框架，其内部提供了对各种优秀框架如(struts2，hibernate,mybatis,quartz，jpa)等的直接支。
+4.方便对程序进行测试，spring对于Junit4的支持，可通过注解方便测试程序。
+5.降低了JavaEE API的使用难度，JDBC,Javamail,远程调用等，spring对它们进行了封装，使这些API的使用难度大大降低。
 
 12.  在Spring中使用hibernate的方法步骤
 
@@ -49,6 +73,16 @@
 20.  什么是 Bean 的自动装配？
 
 21.  介绍一下自动装配有几种方式？
+在Spring中，我们有4种方式可以装配Bean的属性。
+1，byName
+通过byName方式自动装配属性时，是在定义Bean的时候，在property标签中设置autowire属性为byName，那么Spring会自动寻找一个与该属性名称相同或id相同的Bean，注入进来。
+2，byType
+通过byType方式自动注入属性时，是在定义Bean的时候，在property标签中设置autowire属性为byType，那么Spring会自动寻找一个与该属性类型相同的Bean，注入进来。
+3，constructor
+通过构造器自动注入。在定义Bean时，在bean标签中，设置autowire属性为constructor，那么，Spring会寻找与该Bean的构造函数各个参数类型相匹配的Bean，通过构造函数注入进来。
+4，autodetect
+自动装配。如果想进行自动装配，但不知道使用哪种类型的自动装配，那么就可以使用autodetect，让容器自己决定。这是通过在定义Bean时，设置bean标签的autowire属性为autodetect来实现的。设置为autodetect时，Spring容器会首先尝试构造器注入，然后尝试按类型注入。
+默认情况下，Spring是不进行自动装配的。我们可以在xml中，设置beans标签的default-autowire属性为byName，byType等，来设置所有bean都进行自动装配。
 
 22.  什么是基于注解的容器配置?
 
