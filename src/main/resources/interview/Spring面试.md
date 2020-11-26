@@ -31,8 +31,22 @@ ApplicationContext又叫应用上下文，它继承了BeanFactory接口，它是
 4.  请介绍你熟悉的 Spring 核心类，并说明有什么作用？
 
 5.  介绍一下 Spring 的事务的了解？
+事务具备ACID四种特性
+四种隔离级别
+七种事务传播机制（默认required）,以方法A和方法B发生嵌套调用时如何传播事务为例说明:
+PROPAGATION_REQUIRED：A如果有事务，B将使用该事务；如果A没有事务，B将创建一个新的事务
+PROPAGATION_SUPPORTS：A如果有事务，B将使用该事务；如果A没有事务，B将以非事务执行
+PROPAGATION_MANDATORY：A如果有事务，B将使用该事务；如果A没有事务，B将抛异常
+PROPAGATION_REQUIRES_NEW：A如果有事务，将A的事务挂起，B创建一个新的事务；如果A没有事务，B创建一个新的事务
+PROPAGATION_NOT_SUPPORTED：A如果有事务，将A的事务挂起，B将以非事务执行；如果A没有事务，B将以非事务执行
+PROPAGATION_NEVER：A如果有事务，B将抛异常；A如果没有事务，B将以非事务执行
+PROPAGATION_NESTED：A和B底层采用保存点机制，形成嵌套事务
+
 
 6.  介绍一下 Spring 的事务实现方式？
+实现方式共有两种：编程式事务和声明式事务管理方式。
+编程式事务管理通过TransactionTemplate手动管理事务
+声明式事务管理有三种实现方式：基于TransactionProxyFactoryBean的方式、基于AspectJ的XML方式、基于注解的方式
 
 7.  解释 AOP 模块
 
@@ -69,8 +83,10 @@ ApplicationContext又叫应用上下文，它继承了BeanFactory接口，它是
 18.  谈谈你对 Spring 依赖注入的理解？
 
 19.  什么是 Bean 装配?
+是指在Spring 容器中把bean组装到一起
 
 20.  什么是 Bean 的自动装配？
+Spring 容器能够自动装配相互合作的bean，这意味着容器不需要<constructor-arg>和<property>配置，能通过Bean工厂自动处理bean之间的协作
 
 21.  介绍一下自动装配有几种方式？
 在Spring中，我们有4种方式可以装配Bean的属性。
@@ -85,6 +101,7 @@ ApplicationContext又叫应用上下文，它继承了BeanFactory接口，它是
 默认情况下，Spring是不进行自动装配的。我们可以在xml中，设置beans标签的default-autowire属性为byName，byType等，来设置所有bean都进行自动装配。
 
 22.  什么是基于注解的容器配置?
+不使用XML来描述bean装配，开发人员通过在相关的类，方法或字段声明上使用注解将配置移动到组件类本身,例如：Spring 的 Java 配置是通过使用 @Bean 和 @Configuration 来实现。
 
 23.  简述 JdbcTemplate 类的作用
 
