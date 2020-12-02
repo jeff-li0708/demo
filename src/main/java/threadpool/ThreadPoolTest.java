@@ -1,20 +1,25 @@
-package fc;
+package threadpool;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
 /**
+ *
  * Created by liangl on 2019/7/8.
  */
 public class ThreadPoolTest {
-    static ExecutorService es = new ThreadPoolExecutor(2, 5,
+    static ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
+            .setNameFormat("consumer-queue-thread-%d").build();
+    //
+    static ExecutorService es = new ThreadPoolExecutor(10, 10,
             0L, TimeUnit.MILLISECONDS,
-            new LinkedBlockingQueue<Runnable>());
+            new LinkedBlockingQueue<Runnable>(),namedThreadFactory);
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         ThreadPoolTest a = new ThreadPoolTest();
@@ -23,13 +28,13 @@ public class ThreadPoolTest {
             showIdList.add("test-"+i);
         }
 
-        for (int i = 0;i <50;i++) {
-
+        //模拟多个线程并发调用
+        for (int i = 0;i <100;i++) {
             Thread aa = new Thread(new Runnable() {
                 @Override
                 public void run() {
                     JSONArray arr = a.test(showIdList);
-                    System.out.println(JSON.toJSONString(arr));
+                    System.out.println(Thread.currentThread().getName()+JSON.toJSONString(arr));
                 }
             },"thread"+i);
             aa.start();
@@ -53,7 +58,9 @@ public class ThreadPoolTest {
             } catch (InterruptedException e) {
                 System.out.println("eeeeeeeeeeeeeeeee");
                 return null;
-            } finally {
+            }catch (Exception e){
+                System.out.println("reject");
+            }finally {
                 //es.shutdown();
             }
 
@@ -68,7 +75,7 @@ public class ThreadPoolTest {
 
         }
         Long end = System.currentTimeMillis();
-        System.out.println(end - start);
+//        System.out.println(end - start);
         return null;
     }
     class QueryVideoAuthorCommentCount implements Callable<JSONObject>{
@@ -88,13 +95,16 @@ public class ThreadPoolTest {
         param.put("showId", showId);
         System.out.println(Thread.currentThread().getName()+"---"+ 111);
         try {
-            Thread.sleep(300);
+            Thread.sleep(100);
             if (Integer.valueOf(showId.split("-")[1]) % 10 == 1) {
+                Thread.sleep(6000);
                 throw  new RuntimeException();
             }
             return param;
         } catch (Exception e) {
-            return null;
+            JSONObject errorRes = new JSONObject();
+            errorRes.put("error","test1");
+            return errorRes;
         }
     }
 }

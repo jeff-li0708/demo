@@ -12,7 +12,7 @@ public class Test7 {
                 System.out.println("1-"+System.currentTimeMillis());
                 Thread.yield();
                 Thread.yield();
-//                LockSupport.park(this);
+                LockSupport.park(this);
                 System.out.println("1-"+System.currentTimeMillis());
             }
         });
