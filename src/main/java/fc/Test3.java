@@ -7,14 +7,22 @@ import java.util.*;
  */
 public class Test3 {
     public static void main(String[] args) {
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i< 10; i++) {
-            list.add(i);
+        flag:
+        for (int i=0;i<5;i++){
+            for (int j=0;j<5;j++){
+                System.out.println(i+","+j);
+                if (j==2) continue flag;
+
+            }
         }
-        for (Integer a:list){
-            System.out.println(a);
-            if (a>7) list.add(3);
-        }
+//        List<Integer> list = new ArrayList<>();
+//        for (int i = 0; i< 10; i++) {
+//            list.add(i);
+//        }
+//        for (Integer a:list){
+//            System.out.println(a);
+//            if (a>7) list.add(3);
+//        }
 //        Iterator<Integer> iterator = list.iterator();
 //        while (iterator.hasNext()){
 //            Integer a = iterator.next();

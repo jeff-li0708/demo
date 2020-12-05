@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /**
- * ç­‰é¢æœ¬æ¯
+ * µÈ¶î±¾Ï¢
  * Created by liangl on 2019/2/18.
  */
 public class SameCapitalInterest {
@@ -12,14 +12,14 @@ public class SameCapitalInterest {
     public static void main(String[] args) {
         BigDecimal monthRate = new BigDecimal(0.14).divide(new BigDecimal(12),6, RoundingMode.HALF_UP);
         System.out.println(monthRate);
-        calculate(new BigDecimal(10000),new BigDecimal(0.05),12);
+        calculate(new BigDecimal(1000000),new BigDecimal(0.06),12*30);
     }
 
     /**
      *
-     * @param capital æœ¬é‡‘
-     * @param rate å¹´åŒ–ï¼ˆ10%çš„å¹´åŒ–åˆ™ä¼ 0.1ï¼‰
-     * @param period å‘¨æœŸï¼ˆæœˆï¼‰
+     * @param capital ±¾½ğ
+     * @param rate Äê»¯£¨10%µÄÄê»¯Ôò´«0.1£©
+     * @param period ÖÜÆÚ£¨ÔÂ£©
      */
     public static void calculate(BigDecimal capital, BigDecimal rate, Integer period) {
 
@@ -28,18 +28,18 @@ public class SameCapitalInterest {
         BigDecimal var2 = monthRate.add(BigDecimal.ONE).pow(period).subtract(BigDecimal.ONE).setScale(6,BigDecimal.ROUND_UP);
         System.out.println(monthRate+","+var1+","+var2);
         BigDecimal repaymentAmt = monthRate.multiply(var1).divide(var2, 6, BigDecimal.ROUND_UP).multiply(capital).setScale(2,BigDecimal.ROUND_UP);
-        System.out.println("æ¯æœŸï¼š"+repaymentAmt);
+        System.out.println("Ã¿ÆÚ£º"+repaymentAmt);
         BigDecimal remainCapital = capital;
         for (int i = 1;i <= period; i++) {
             BigDecimal var3 = remainCapital.multiply(monthRate);
             BigDecimal var4 = repaymentAmt.subtract(var3);
             remainCapital = remainCapital.subtract(var4);
-            System.out.println("ç¬¬"+i+"æœŸæœ¬é‡‘ï¼š"+var4.setScale(2,BigDecimal.ROUND_UP)+",åˆ©æ¯ï¼š"+var3.setScale(2,BigDecimal.ROUND_UP));
+            System.out.println("µÚ"+i+"ÆÚ±¾½ğ£º"+var4.setScale(2,BigDecimal.ROUND_UP)+",ÀûÏ¢£º"+var3.setScale(2,BigDecimal.ROUND_UP));
         }
 
     }
 
     /**
-     * å…¬ç§¯é‡‘40W30å¹´1740.83
+     * ¹«»ı½ğ40W30Äê1740.83
      */
 }

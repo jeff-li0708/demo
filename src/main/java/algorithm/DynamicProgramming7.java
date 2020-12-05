@@ -1,5 +1,7 @@
 package algorithm;
 
+import com.alibaba.fastjson.JSON;
+
 import java.util.*;
 
 /**
@@ -17,8 +19,27 @@ import java.util.*;
 public class DynamicProgramming7 {
 
     public static void main(String[] args) {
+        int[] res = new int[2];
+        res[0]=2;
         int n = 3, src = 0, dst = 2, k = 1;
         int[][]  edges = {{0,1,100},{1,2,100},{0,2,500}};
+
+        String s1 = "123";
+        String s2 = "3";
+        int i = (s1 + s2).compareTo(s2 + s1);
+        int j = i+1==n?0:i+1;
+        Arrays.sort(edges, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                if (o1[0]!=o2[0]) return o1[0]-o2[0];
+                else return o1[1]-o2[1];
+            }
+        });
+        char a =1;
+        char b=2;
+        Character.compare(a,b);
+
+
 //        int n = 5,src = 0,dst = 4, k = 1;
 //        int[][]  edges = {{1,2,10},{2,0,7},{1,3,8},{4,0,10},{3,4,2},{4,2,10},{0,3,3},{3,1,6},{2,4,5}};
 //        int n = 17,src = 13,dst = 4,k = 13;
