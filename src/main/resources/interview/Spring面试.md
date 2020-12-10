@@ -29,6 +29,9 @@ ApplicationContext又叫应用上下文，它继承了BeanFactory接口，它是
 5) AOP（拦截器）
 
 4.  请介绍你熟悉的 Spring 核心类，并说明有什么作用？
+org.springframework.context.support.AbstractApplicationContext类中refresh方法定义了spring刷新时的模板
+org.springframework.beans.factory.support.DefaultListableBeanFactory，保存了所有需要spring管理的类的定义集合beanDefinitionMap
+org.springframework.beans.factory.support.DefaultSingletonBeanRegistry 保存了1、2、3级缓存
 
 5.  介绍一下 Spring 的事务的了解？
 事务具备ACID四种特性
