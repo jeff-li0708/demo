@@ -81,6 +81,20 @@ PROPAGATION_NESTED：A和B底层采用保存点机制，形成嵌套事务
 13.  Spring 和 Struts 的区别？
 
 14.  Spring 框架由那几部分组成？
+1.Spring Core
+Core封装包是框架的最基础部分，提供IOC和依赖注入的特性。这里的基础概念是BeanFactory，它提供对Factory模式的经典实现来消除对程序性单例模式的需要，并真正地允许你从程序逻辑中分离出依赖关系和配置。
+2.Spring Context
+构建于Core封装包基础上的Context封装包,提供了一种框架式的对象访问方法，有些像JNDI注册器。Context封装包的特性得自于Beans封装包，并添加了对国际化（I18N）的支持（例如资源绑定），事件传播，资源装载的方式和Context的透明创建，比如说通过Servlet容器。
+3.Spring DAO
+DAO(Data Access Object)提供了JDBC的抽象层，它可消除冗长的JDBC编码和解析数据库厂商特有的错误代码。并且，JDBC封装包还提供了一种比编程性更好的声明性事务管理方法，不仅仅是实现了特定接口，而且对所有的POJOs（plain old Java objects）都适合。
+4.Spring ORM
+ORM封装包提供了常用的“对象/关系”映射APIs的集成层。其中包括JPA、JDO、Hibernate 和myiBatis。利用ORM封装包，可以混合使用所有Spring提供的特性进行“对象/关系”映射，如期边提到的简单声明性事务管理。
+5.Spring AOP
+AOP模块是Spring的AOP库，提供了AOP（拦截器）机制，并提供常用的拦截器，提供用户自定义和配置。
+6.Spring Web
+WEB模块提供对常见框架如Struts1,WEBWORK（Struts2）,JSF的支持，Spring能够管理这些框架，将Spring的资源注入给框架，也能在这些框架的前后插入拦截器
+7.Spring MVC
+Spring中的MVC封装包提供了Web应用的Model-View-Controller（MVC）实现。Spring的MVC框架并不是仅仅提供一种传统的实现，它提供了一种清晰的分离模型，在领域模式代码和Web Form 之间。并且，还可以借助Spring框架的其他特性。
 
 15.  谈谈你对 BeanFactory的理解，BeanFactory 实现举例
 
@@ -152,6 +166,12 @@ Spring 容器能够自动装配相互合作的bean，这意味着容器不需要
 8.  你怎样定义类的作用域?
 
 9.  解释 Spring 支持的几种 Bean 的作用域
+singleton：单例模式，在整个Spring IoC容器中，使用 singleton 定义的 bean 只有一个实例
+prototype：原型模式，每次通过容器的getbean方法获取 prototype 定义的 bean 时，都产生一个新的 bean 实例
+request：每次http请求都会创建一个bean，该作用域仅在基于web的Spring ApplicationContext情形下有效。
+session：在一个HTTP Session中，一个bean定义对应一个实例。该作用域仅在基于web的Spring ApplicationContext情形下有效。
+global-session：在一个全局的HTTP Session中，一个bean定义对应一个实例。该作用域仅在基于web的Spring ApplicationContext情形下有效。
+缺省的Spring bean 的作用域是Singleton.
 
 10.  在 Spring 中如何注入一个 Java 集合？
 
