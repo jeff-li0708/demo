@@ -19,9 +19,9 @@ public class FileChannelTest {
         }
         FileChannel inChannel = aFile.getChannel();
 
-        ByteBuffer buf = ByteBuffer.allocate(100);
+        ByteBuffer buf = ByteBuffer.allocate(100);//创建一个容量为100的字节缓冲区
 
-        int bytesRead = inChannel.read(buf);
+        int bytesRead = inChannel.read(buf);//读入到缓存区中
         while (bytesRead != -1) {
 
             System.out.println("Read " + bytesRead);

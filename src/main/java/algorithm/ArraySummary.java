@@ -1,6 +1,8 @@
 package algorithm;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ArraySummary {
 
@@ -53,14 +55,36 @@ public class ArraySummary {
         }
         return (x - index1) - (y - index2);
     }
-
+    //小于等于N的最大递增数，如1234
+    public int monotoneIncreasingDigits(int N) {
+        int i = 1;
+        int res = N;
+        while(i <= res/10) {
+            int n = res / i % 100; // 每次取两个位
+            i *= 10;
+            if(n/10 > n%10) // 比较的高一位大于底一位
+                res = res / i * i - 1; //例如1332 循环第一次变为1330-1=1329 第二次变为1300-1=1299
+        }
+        return res;
+    }
+    // 买卖股票的最佳时机II
+    public int maxProfit(int[] prices) {
+        int res=0;
+        int n=prices.length;
+        for(int i=1;i<n;i++){
+            res+=Math.max(0,prices[i]-prices[i-1]);
+        }
+        return res;
+    }
     public static void main(String[] args) {
         int[] nums = new int[]{6,7};
         int[] nums2=new int[]{6,0,4};
         ArraySummary obj = new ArraySummary();
-        int[] ints = obj.maxMerge(nums, nums2);
-        Arrays.stream(ints).forEach(System.out::println);
+//        int[] ints = obj.maxMerge(nums, nums2);
+//        Arrays.stream(ints).forEach(System.out::println);
+        obj.monotoneIncreasingDigits(382);
 
 
     }
+
 }

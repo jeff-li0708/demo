@@ -7,4 +7,11 @@ import org.springframework.stereotype.Service;
 public class A {
     @Autowired
     B b;
+    public void test(){
+        b.add();
+        String s = "";
+        char a = 'a';
+        char i = (char) (a + 1);
+
+    }
 }

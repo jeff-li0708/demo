@@ -12,5 +12,16 @@ public class B {
     @Transactional
     public void add(){
         System.out.println("this is B");
+        this.b();
+    }
+
+    @Transactional
+    public void a(){
+        this.b();
+    }
+
+    @Transactional
+    public void b(){
+        System.out.println("this is b Method");
     }
 }

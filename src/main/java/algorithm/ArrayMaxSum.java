@@ -1,6 +1,7 @@
 package algorithm;
 
 import java.util.Arrays;
+import java.util.PriorityQueue;
 
 /**
  * 给定一个数组，可以对其中K个数取反，求数组的最大和
@@ -10,9 +11,22 @@ import java.util.Arrays;
 public class ArrayMaxSum {
 
     public static void main(String[] args) {
+
+
         int A[] = {-8,3,-5,-3,-5,-2};
         int K = 6;
         System.out.println(largestSumAfterKNegations(A,K));
+    }
+
+    public int lastStoneWeight(int[] stones) {
+        PriorityQueue<Integer> queue = new PriorityQueue<>((a,b) -> { return b-a;});
+        for (int a:stones) queue.add(a);
+        while(queue.size()>1){
+            int max = queue.remove();
+            int max2 = queue.remove();
+            if (max>max2) queue.add(max-max2);
+        }
+        return queue.size()==1?queue.remove():0;
     }
     public static int largestSumAfterKNegations(int[] A, int K) {
         Arrays.sort(A);
