@@ -1,4 +1,4 @@
-package fc;
+package thread;
 
 /**
  * 基于synchronized和wait/notify
