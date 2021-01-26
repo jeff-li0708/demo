@@ -14,6 +14,14 @@ public class MapMinPathDijkstra {
         System.out.println(dijkstra);
     }
 
+    /**
+     *
+     * @param edges 边以及对应的权重
+     * @param n 节点个数
+     * @param start 开始节点
+     * @param target 目标节点
+     * @return 开始节点到目标节点的最短路径（这里就是最小的权重和）
+     */
     public int dijkstra(int[][] edges,int n, int start, int target){
         int INF = Integer.MAX_VALUE/2;
 
