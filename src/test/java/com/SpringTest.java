@@ -8,6 +8,9 @@ import com.liangzai.service.A;
 import com.liangzai.service.UserService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by liangl on 2019/9/5.
  */
@@ -15,6 +18,11 @@ public class SpringTest {
 
 
 	public static void main(String[] args) {
+		User user1 = new User();
+		User user2 = new User();
+		System.out.println(user1.hashCode()+"|"+user2.hashCode()+"|"+user1.hashCode());
+		Map<User,Integer> map = new HashMap<>();
+		map.put(user2,1);
 
 		//通过Java代码方式创建应用上下文
 		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(); //
