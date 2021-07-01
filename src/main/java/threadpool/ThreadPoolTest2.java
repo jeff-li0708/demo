@@ -7,7 +7,7 @@ import java.util.concurrent.*;
 public class ThreadPoolTest2 {
     static ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
             .setNameFormat("consumer-queue-thread-%d").build();
-    static ExecutorService es = new ThreadPoolExt(2, 2,
+    static ExecutorService es = new ThreadPoolExt(0, 2,
             0L, TimeUnit.MILLISECONDS,
             new LinkedBlockingQueue<Runnable>(4),namedThreadFactory,new RejectedPolicyWithReport());
 

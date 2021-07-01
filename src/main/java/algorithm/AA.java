@@ -1,9 +1,6 @@
 package algorithm;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AA {
     public static void main(String[] args) {
@@ -11,6 +8,8 @@ public class AA {
 //        String[] words = {"word","good","best","good"};
 //        String s = "aaa";
 //        String[] words = {"a","a"};
+        HashSet<Integer> set = new LinkedHashSet();
+        set.clear();
         String s = "barfoofoobarthefoobarman";
         String[] words = {"bar","foo","the"};
 //        String s = "aaaaaaaaaaaaaa"; //1,2,3,4,5,6,7,8,9,10
