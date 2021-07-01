@@ -20,6 +20,11 @@ public class User {
         return seed;
     }
 
+    public User(Long seed, String userName) {
+        this.seed = seed;
+        this.userName = userName;
+    }
+
     public void setSeed(Long seed) {
         this.seed = seed;
     }

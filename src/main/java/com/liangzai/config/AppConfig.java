@@ -1,12 +1,17 @@
 package com.liangzai.config;
 
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import com.liangzai.bean.User;
 import com.liangzai.register.MyMapperScan;
+import org.apache.ibatis.mapping.CacheBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by liangl on 2019/9/9.
@@ -28,5 +33,12 @@ public class AppConfig {
 		return new User();
 	}
 
+	@Bean("referRateCache")
+	Cache<String,Object> referRateCache(){
+		return Caffeine.newBuilder()
+				.maximumSize(100)
+				.expireAfterWrite(5, TimeUnit.SECONDS)
+				.build();
+	}
 
 }

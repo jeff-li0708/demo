@@ -5,6 +5,7 @@ import com.liangzai.bean.User;
 import com.liangzai.config.AppConfig;
 import com.liangzai.dao.UserDao;
 import com.liangzai.service.A;
+import com.liangzai.service.D;
 import com.liangzai.service.UserService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -14,7 +15,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class SpringTest {
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 
 		//通过Java代码方式创建应用上下文
 		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(); //
@@ -22,8 +23,22 @@ public class SpringTest {
 		applicationContext.register(AppConfig.class);
 
 		applicationContext.refresh();
-		A a = (A) applicationContext.getBean("a");
-		a.test();
+		D a = (D) applicationContext.getBean("d");
+		for(int i=0;i<100;i++){
+			Thread thread = new Thread(new Runnable() {
+				@Override
+				public void run() {
+//					try {
+//						Thread.sleep(4999);
+//					} catch (InterruptedException e) {
+//						e.printStackTrace();
+//					}
+					a.getUser();
+				}
+			},"th:----->"+i);
+			thread.start();
+		}
+
 		UserService userService = applicationContext.getBean(UserService.class);
 		userService.queryUser();
 		//获取通过注解Bean注册的对象

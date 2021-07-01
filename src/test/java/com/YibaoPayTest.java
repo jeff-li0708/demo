@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
 /**
  * Created by liangl on 2019/4/15.
  */
@@ -31,6 +32,9 @@ public class YibaoPayTest {
         req.setUsername("李亮");
         req.setPhone("18728344025");
         yibaoPayService.authBindCardReq(req);
+        assertEquals(1,3-2);
+
+
     }
 
     /**
