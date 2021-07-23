@@ -12,8 +12,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 //@SpringBootTest(classes = ApiWebApplication.class)
 public class BaseTest {
+
+
     @Test
     public void test1() {
         System.out.println(11);
+        System.out.println(22);
     }
 }
